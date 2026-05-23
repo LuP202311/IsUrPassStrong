@@ -28,8 +28,10 @@ def usedAllCharac(MDP):
     return messageC, hasAllCharac
 
 def isMDPobvious(MDP):
-    rockYouFile = open("./rockyou/rockyou.txt", "r", encoding="latin-1")
-    fileContent = rockYouFile.read()
+    #rockYouFile = open("./rockyou/rockyou.txt", "r", encoding="latin-1")
+    #fileContent = rockYouFile.read().splitlines()
+    mdpConnuesFile = open("./mdp_connues/mdp_connues.txt", "r", encoding="latin-1")
+    fileContent = mdpConnuesFile.read().splitlines()
     if MDP in fileContent:
         isObvious = True
         messageO = "Le mot de passe est trop évident"
@@ -37,7 +39,7 @@ def isMDPobvious(MDP):
         isObvious = False
         messageO = ""
 
-    rockYouFile.close()
+    mdpConnuesFile.close()
     return messageO, isObvious
     
 saisie = input("Veuillez saisir le mot de passe: ")

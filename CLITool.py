@@ -30,7 +30,7 @@ def testMDP(mdp: str) -> tuple[bool, str, str, bool, str, bool]:
         for word in fileContent:
             if word.lower() in mdp.lower():
                 isObvious = True
-                messageO = "Le mot de passe est trop évident."
+                messageO = "Le mot de passe figure dans la liste des mots de passe évidents."
                 break
             else:
                 isObvious = False

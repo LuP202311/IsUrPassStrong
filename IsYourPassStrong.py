@@ -15,7 +15,6 @@ def isMDPLong(MDP):
     else:
         isLong = True
         message = ""
-    
     return isLong, message
 
 def usedAllCharac(MDP):
@@ -40,7 +39,6 @@ def isMDPobvious(MDP):
         else:
             isObvious = False
             messageO = ""
-
     mdpConnuesFile.close()
     return messageO, isObvious
     

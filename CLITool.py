@@ -83,9 +83,5 @@ def verifMDP(mdp: str = typer.Option(None, "--mdp", help="Vérifier la robustess
 
     typer.echo(typer.style("Le mot de passe a tous les critères de robustesse.", fg=typer.colors.GREEN))
 
-def do_quit(self, line):
-    """Exit the CLI."""
-    return True
-
 if __name__ == '__main__':
     app()

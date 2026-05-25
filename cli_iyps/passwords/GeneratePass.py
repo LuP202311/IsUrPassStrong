@@ -24,7 +24,7 @@ def createPass(length=16):
     return password
 
 @app.command()
-def generatePass(generate:bool = typer.Option(False,"--generate","-g",help="Générer un mot de passe")):
+def generate():
     """Générer un mot de passe robuste"""
 
     if generate:
@@ -32,6 +32,3 @@ def generatePass(generate:bool = typer.Option(False,"--generate","-g",help="Gén
         typer.echo(typer.style(f"Voici le mot de passe généré: {password}",fg=typer.colors.GREEN))
     else:
         typer.echo(typer.style("Saisissez `python GeneratePass.py --generate` ou `python GeneratePass.py -g` pour générer un mot de passe",fg=typer.colors.CYAN))
-
-if __name__ == '__main__':
-    app()

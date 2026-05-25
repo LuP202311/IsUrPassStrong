@@ -1,6 +1,7 @@
 import cmd
 import re
 import typer
+import os
 
 app = typer.Typer()
 
@@ -23,7 +24,10 @@ def testMDP(mdp: str) -> tuple[bool, str, str, bool, str, bool]:
 
         # Si le mot de passe apparaît dans le fichier des mots de passe facilement trouvés :
 
-        mdpConnuesFile = open("./mdp_connues/mdp_connues.txt", "r", encoding="latin-1")
+        dossier = os.path.dirname(__file__)
+        chemin = os.path.join(dossier + "\\mdp_connues","mdp_connues.txt")
+
+        mdpConnuesFile = open(chemin, "r", encoding="latin-1")
         fileContent = mdpConnuesFile.read().splitlines()
         mdpConnuesFile.close()
 
@@ -57,22 +61,25 @@ def testMDP(mdp: str) -> tuple[bool, str, str, bool, str, bool]:
 
     return isLong, message, messageC, hasAllCharac, messageO, isObvious
 
+# Sans intéraction :
 @app.command()
-def verifMDP(mdp: str = typer.Option(None, "--mdp", help="Vérifier la robustesse du mot de passe directement en ligne de commande"), 
-            interactif: bool = typer.Option(False, "--interact", help="Vérifier la robustesse du mot de passe de manière interactive (avec saisie)")):  
+def mdp(mdp: str = typer.Argument(None, help="Vérifier la robustesse du mot de passe directement en ligne de commande")):  
     """Vérification de la robustesse d'un mot de passe"""
 
-    # Sans intéraction :
+    isLong, message, messageC, hasAllCharac, messageO, isObvious = testMDP(mdp)
 
-    if mdp is None and not interactif:
-        typer.echo("Saisissez `python CLITool.py --mdp <mot_de_passe> ou --interact`")
+    while isLong and hasAllCharac and not isObvious:
+        typer.echo(typer.style("Le mot de passe a tous les critères de robustesse.", fg=typer.colors.GREEN))
         raise typer.Exit()
-
-    # Avec intéraction :
-
-    if interactif or mdp is None:
-        mdp = typer.prompt("Veuillez saisir le mot de passe")
     
+    erreurs = "\n".join(filter(None, [message, messageC, messageO]))
+    typer.echo(typer.style(erreurs, fg=typer.colors.RED))
+
+# Avec intéraction :
+@app.command()
+def interactif():  
+    mdp = typer.prompt("Veuillez saisir le mot de passe")
+
     isLong, message, messageC, hasAllCharac, messageO, isObvious = testMDP(mdp)
 
     while not isLong or not hasAllCharac or isObvious:
@@ -80,8 +87,4 @@ def verifMDP(mdp: str = typer.Option(None, "--mdp", help="Vérifier la robustess
         typer.echo(typer.style(erreurs, fg=typer.colors.RED))
         re_mdp = typer.prompt("Veuillez re-saisir le mot de passe")
         isLong, message, messageC, hasAllCharac, messageO, isObvious = testMDP(re_mdp)
-
     typer.echo(typer.style("Le mot de passe a tous les critères de robustesse.", fg=typer.colors.GREEN))
-
-if __name__ == '__main__':
-    app()

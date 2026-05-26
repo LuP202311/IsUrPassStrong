@@ -1,6 +1,6 @@
 # Projet Personnel : IsYourPassStrong
 
-Pour debugguer Python sur Visual Studio Code, installez Anaconda Distributor et Python version 3.11
+Pour déboguer Python sur Visual Studio Code, installez Anaconda Distributor et Python version 3.11
 
 **IsYourPassStrong** est un programme en Python qui permet de vérifier si un mot de passe est assez robuste selon sa longueur, les caractères utilisés, etc. et d'en générer via la CLI avec la librairie Typer.
 

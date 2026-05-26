@@ -4,6 +4,7 @@
 
 __Pour tester les commandes à partir de la CLI:<br>__
 - Accédez au dossier _cli_iyps_ avec la commande : ```cd cli_iyps```<br>
+- La commande qui affiche toutes les commandes : ```python main.py help```
 - La commande permettant de vérifier si un mot de passe est robuste directement en commande : ```python main.py verifier mdp "<mot_de_passe>"```<br>
 - La commande permettant de vérifier si un mot de passe est robuste de manière interactive : ```python main.py verifier interactif```<br>
 - La commande permettant de générer un mot de passe robuste : ```python main.py generate```

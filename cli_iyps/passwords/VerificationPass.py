@@ -1,4 +1,3 @@
-import cmd
 import re
 import typer
 import os
